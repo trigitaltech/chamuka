@@ -54,14 +54,19 @@ export const RESOURCES = [
 ];
 
 export const GALLERY_ITEMS = [
-  { id: 1, title: "Installation Ceremony", category: "Ceremony", size: "2x2" as const, image: "/gallery/ceremony-1.jpg", type: "image" as const },
-  { id: 2, title: "HeForShe Summit 2023", category: "Summit", size: "2x1" as const, image: "/gallery/summit-1.jpg", type: "image" as const },
-  { id: 3, title: "Land Certification Handover", category: "Community", size: "1x1" as const, image: "/gallery/community-1.jpg", type: "image" as const },
-  { id: 4, title: "UN General Assembly Address", category: "Media", size: "1x2" as const, image: "/gallery/media-1.jpg", type: "image" as const },
-  { id: 5, title: "Community Insaka Meeting", category: "Community", size: "1x1" as const, image: "/gallery/community-2.jpg", type: "image" as const },
-  { id: 6, title: "Cultural Dance Performance", category: "Ceremony", size: "2x1" as const, image: "/gallery/ceremony-2.jpg", type: "image" as const },
-  { id: 7, title: "Gender Equality Workshop", category: "Summit", size: "1x1" as const, image: "/gallery/summit-2.jpg", type: "video" as const, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-  { id: 8, title: "Traditional Council Session", category: "Community", size: "1x1" as const, image: "/gallery/community-3.jpg", type: "image" as const },
+  { id: 1, title: "Installation Ceremony", category: "Ceremony", size: "2x2" as const, image: "/gallery/ceremony-1.jpeg", type: "image" as const },
+  { id: 2, title: "HeForShe Summit 2023", category: "Summit", size: "2x1" as const, image: "/gallery/summit-1.jpeg", type: "image" as const },
+  { id: 3, title: "Land Certification Handover", category: "Community", size: "1x1" as const, image: "/gallery/community-1.jpeg", type: "image" as const },
+  { id: 4, title: "UN General Assembly Address", category: "Media", size: "1x2" as const, image: "/gallery/media-1.jpeg", type: "image" as const },
+  { id: 5, title: "Community Insaka Meeting", category: "Community", size: "1x1" as const, image: "/gallery/community-2.jpeg", type: "image" as const },
+  { id: 6, title: "Cultural Dance Performance", category: "Ceremony", size: "2x1" as const, image: "/gallery/ceremony-2.jpeg", type: "image" as const },
+  { id: 7, title: "Gender Equality Workshop", category: "Summit", size: "1x1" as const, image: "/gallery/summit-2.jpeg", type: "image" as const },
+  { id: 8, title: "Traditional Council Session", category: "Community", size: "1x1" as const, image: "/gallery/community-3.jpeg", type: "image" as const },
+  { id: 9, title: "H.R.H. Chief Chamuka VI – Interview", category: "Media", size: "2x1" as const, image: "https://img.youtube.com/vi/lrX9uMAxJ3U/hqdefault.jpg", type: "video" as const, videoUrl: "https://www.youtube.com/embed/lrX9uMAxJ3U" },
+  { id: 10, title: "Preservation of Indigenous Seeds", category: "Community", size: "2x1" as const, image: "https://img.youtube.com/vi/eW_KN8Eog8U/hqdefault.jpg", type: "video" as const, videoUrl: "https://www.youtube.com/embed/eW_KN8Eog8U" },
+  { id: 11, title: "GLTN Champion Recognition", category: "Media", size: "2x2" as const, image: "/gallery/gltn-champion.jpeg", type: "image" as const, description: "GLTN's IAB Chairperson H.E. Mme. Brenda Mumtemba honors H.R.H. Chief Chamuka VI as a GLTN Champion for his efforts in championing land rights for women, youth and the poor using GLTN tools." },
+  { id: 12, title: "Land Empowerment – World Bank Conference", category: "Community", size: "1x2" as const, image: "/gallery/land-empowerment.jpeg", type: "image" as const, description: "H.R.H. Chief Chamuka VI at the 19th Annual World Bank Conference on Land and Poverty in Washington D.C., advocating for the Social Tenure Domain Model (STDM) system to empower women and youth with land certificates." },
+  { id: 13, title: "Courtesy Call – Zambian Ambassador to the USA", category: "Media", size: "1x1" as const, image: "/gallery/land-empowerment-ambassador.jpg", type: "image" as const, description: "H.R.H. Chief Chamuka VI with Zambia's Ambassador to the United States, H.E. Dr. Ngosa Simbyakula S.C., during a courtesy call at the Embassy in Washington D.C." },
 ];
 
 export const EVENTS = [

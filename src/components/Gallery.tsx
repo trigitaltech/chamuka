@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, X, Calendar, ArrowRight, Image as ImageIcon } from "lucide-react";
 import { FadeUp, StaggerContainer, StaggerItem } from "./AnimatedSection";
@@ -11,10 +11,16 @@ type ModalContent = {
   title: string;
   image?: string;
   videoUrl?: string;
+  description?: string;
 } | null;
 
 export function Gallery() {
   const [modal, setModal] = useState<ModalContent>(null);
+  const [brokenImages, setBrokenImages] = useState<Set<number>>(new Set());
+
+  const handleImageError = useCallback((id: number) => {
+    setBrokenImages((prev) => new Set(prev).add(id));
+  }, []);
 
   const getGridClass = (size: string) => {
     switch (size) {
@@ -61,17 +67,30 @@ export function Gallery() {
                       title: item.title,
                       image: item.image,
                       videoUrl: item.type === "video" ? item.videoUrl : undefined,
+                      description: "description" in item ? (item as Record<string, unknown>).description as string : undefined,
                     })
                   }
                   className="card-glow w-full h-full rounded-xl overflow-hidden relative group"
                   style={{ background: "var(--color-surface)" }}
                 >
-                  {/* Placeholder image area */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <ImageIcon
-                      size={item.size === "2x2" ? 48 : 32}
-                      style={{ color: "var(--color-text-secondary)", opacity: 0.2 }}
-                    />
+                  {/* Thumbnail image */}
+                  <div className="absolute inset-0">
+                    {item.image && !brokenImages.has(item.id) ? (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        onError={() => handleImageError(item.id)}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <ImageIcon
+                          size={item.size === "2x2" ? 48 : 32}
+                          style={{ color: "var(--color-text-secondary)", opacity: 0.2 }}
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Hover overlay */}
@@ -209,6 +228,25 @@ export function Gallery() {
                     title={modal.title}
                     loading="lazy"
                   />
+                </div>
+              ) : modal.image ? (
+                <div>
+                  <img
+                    src={modal.image}
+                    alt={modal.title}
+                    className="w-full max-h-[70vh] object-contain"
+                    style={{ background: "var(--color-bg)" }}
+                  />
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}>
+                      {modal.title}
+                    </h3>
+                    {modal.description && (
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                        {modal.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <div className="aspect-[4/3] flex items-center justify-center" style={{ background: "var(--color-bg)" }}>
