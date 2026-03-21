@@ -14,7 +14,22 @@
       "Bash(curl -sL -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://statehouse.gov.ng/team/bola-ahmed-tinubu/\" -o /tmp/nigeria_site.html)",
       "Bash(curl -sL -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://www.zambiatourism.com/\" -o /tmp/zambia_site.html)",
       "WebFetch(domain:statehouse.gov.ng)",
-      "WebFetch(domain:www.zambiatourism.com)"
+      "WebFetch(domain:www.zambiatourism.com)",
+      "Bash(npx next:*)",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Launch of Gender-Based Violence By-Laws.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\events\\\\gbv-launch.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Annual HeForShe Community Dialogue.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\events\\\\heforshe-2023.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Land Certification Ceremony.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\events\\\\land-cert.jpg\")",
+      "Bash(md5sum C:UsersVenkataDesktopNew RequirementsChief_WebsiteSitepublicgallery/* C:UsersVenkataDesktopNew RequirementsChief_WebsiteSitepublicevents/*)",
+      "Bash(md5sum C:UsersVenkataDesktopNew RequirementsChief_Websiteimg/*.jpeg C:UsersVenkataDesktopNew RequirementsChief_Websiteimg/*.jpg)",
+      "Bash(find gallery:*)",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Speach.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\media-1.jpeg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Traditional_Speach.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\summit-2.jpeg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Land Certification Ceremony.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\community-1.jpeg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Annual HeForShe Community Dialogue1.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\events\\\\heforshe-2023.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\Chief Chamuka VI of the Lenje people salute.jpg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\chief-salute.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\GLTN Partner.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\gltn-partner.jpeg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\US_Peace_crop.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\us-peace.jpeg\")",
+      "Bash(cp \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\img\\\\img9_Cultural_Programes.jpeg\" \"C:\\\\Users\\\\Venkata\\\\Desktop\\\\New Requirements\\\\Chief_Website\\\\Site\\\\public\\\\gallery\\\\cultural-programmes.jpeg\")"
     ]
   }
 }

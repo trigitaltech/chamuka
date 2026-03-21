@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ChevronDown, Target, Eye, Shield, Users, Scale, Landmark } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronLeft, ChevronRight, Target, Eye, Shield, Users, Scale, Landmark } from "lucide-react";
 import { FadeUp, StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TIMELINE_EVENTS } from "@/lib/constants";
 
@@ -23,6 +23,15 @@ const ACCORDION_ITEMS = [
 
 export function About() {
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+  const currentIndex = TIMELINE_EVENTS.findIndex((e) => e.isCurrent);
+  const [activeSlide, setActiveSlide] = useState(currentIndex >= 0 ? currentIndex : TIMELINE_EVENTS.length - 1);
+
+  const goTo = useCallback((index: number) => {
+    setActiveSlide(Math.max(0, Math.min(index, TIMELINE_EVENTS.length - 1)));
+  }, []);
+
+  const goPrev = useCallback(() => goTo(activeSlide - 1), [activeSlide, goTo]);
+  const goNext = useCallback(() => goTo(activeSlide + 1), [activeSlide, goTo]);
 
   return (
     <section
@@ -238,101 +247,168 @@ export function About() {
             <span className="diamond" />
           </div>
 
-          {/* Vertical Timeline */}
+          {/* Carousel Timeline */}
           <div className="relative max-w-4xl mx-auto">
-            {/* Central vertical line */}
-            <div
-              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-px"
-              style={{ background: "var(--color-accent)", opacity: 0.3 }}
-            />
-
-            {TIMELINE_EVENTS.map((event, i) => {
-              const isLeft = i % 2 === 0;
-              return (
-                <motion.div
-                  key={event.year}
-                  initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className={`relative flex items-start mb-12 last:mb-0 ${
-                    isLeft
-                      ? "md:flex-row md:text-right"
-                      : "md:flex-row-reverse md:text-left"
-                  }`}
-                >
-                  {/* Dot on the line */}
-                  <div
-                    className="absolute left-4 md:left-1/2 top-2 z-10 -translate-x-1/2 flex items-center justify-center"
+            {/* Year dots / progress track */}
+            <div className="flex items-center justify-center gap-1 mb-8">
+              {TIMELINE_EVENTS.map((event, i) => {
+                const isActive = i === activeSlide;
+                const isCurrent = event.isCurrent;
+                return (
+                  <button
+                    key={event.year}
+                    onClick={() => goTo(i)}
+                    className="group relative flex flex-col items-center"
+                    aria-label={`Go to ${event.year}`}
                   >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2, duration: 0.4, type: "spring" }}
-                      className="w-4 h-4 rounded-full border-[3px]"
-                      style={{
-                        borderColor: "var(--color-accent)",
-                        background: "var(--color-bg)",
-                      }}
-                    />
-                  </div>
-
-                  {/* Glowing ring pulse */}
-                  <div
-                    className="absolute left-4 md:left-1/2 top-2 -translate-x-1/2 w-4 h-4 rounded-full animate-ping opacity-20"
-                    style={{ background: "var(--color-accent)" }}
-                  />
-
-                  {/* Content card */}
-                  <div
-                    className={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${
-                      isLeft ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
-                    }`}
-                  >
-                    {/* Connector line from dot to card */}
-                    <div
-                      className={`hidden md:block absolute top-[0.65rem] w-6 h-px ${
-                        isLeft ? "right-[50%] mr-2" : "left-[50%] ml-2"
-                      }`}
-                      style={{ background: "var(--color-accent)", opacity: 0.4 }}
-                    />
-
-                    <div
-                      className="card-glow p-6 rounded-xl relative group hover:scale-[1.02] transition-transform duration-300"
-                      style={{ background: "var(--color-surface)" }}
-                    >
-                      {/* Year badge */}
-                      <span
-                        className="inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3"
+                    {/* Connecting line (not on first) */}
+                    {i > 0 && (
+                      <div
+                        className="absolute right-full top-1/2 -translate-y-1/2 h-px hidden sm:block"
                         style={{
-                          background: "var(--color-accent)",
-                          color: "#0B1F13",
+                          width: "calc(100% - 0.25rem)",
+                          background: i <= activeSlide ? "var(--color-accent)" : "var(--color-text-secondary)",
+                          opacity: i <= activeSlide ? 0.6 : 0.2,
+                        }}
+                      />
+                    )}
+                    {/* Dot */}
+                    <div
+                      className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer"
+                      style={{
+                        background: isActive
+                          ? "var(--color-accent)"
+                          : isCurrent
+                          ? "rgba(212, 168, 67, 0.3)"
+                          : "var(--color-surface)",
+                        border: isCurrent && !isActive
+                          ? "2px solid var(--color-accent)"
+                          : isActive
+                          ? "none"
+                          : "2px solid var(--color-text-secondary)",
+                        transform: isActive ? "scale(1.15)" : "scale(1)",
+                        boxShadow: isActive ? "0 0 20px rgba(212, 168, 67, 0.4)" : "none",
+                      }}
+                    >
+                      <span
+                        className="text-[10px] sm:text-xs font-bold"
+                        style={{
+                          color: isActive ? "#0B1F13" : "var(--color-text-secondary)",
                         }}
                       >
-                        {event.year}
+                        {event.year.slice(-2)}
                       </span>
-                      <h4
-                        className="text-lg font-semibold mb-2"
-                        style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
-                      >
-                        {event.title}
-                      </h4>
-                      <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                        {event.description}
-                      </p>
+                      {/* Pulse ring for current */}
+                      {isCurrent && (
+                        <span
+                          className="absolute inset-0 rounded-full animate-ping opacity-20"
+                          style={{ background: "var(--color-accent)" }}
+                        />
+                      )}
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </button>
+                );
+              })}
+            </div>
 
-            {/* End cap dot */}
-            <div className="absolute left-4 md:left-1/2 -bottom-2 -translate-x-1/2">
-              <div
-                className="w-3 h-3 rounded-full"
-                style={{ background: "var(--color-accent)" }}
-              />
+            {/* Slide card with navigation arrows */}
+            <div className="relative flex items-center gap-4">
+              {/* Prev arrow */}
+              <button
+                onClick={goPrev}
+                disabled={activeSlide === 0}
+                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-20"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-accent)",
+                }}
+                aria-label="Previous milestone"
+              >
+                <ChevronLeft size={20} style={{ color: "var(--color-accent)" }} />
+              </button>
+
+              {/* Card area */}
+              <div className="flex-1 overflow-hidden relative" style={{ minHeight: "220px" }}>
+                <AnimatePresence mode="wait">
+                  {TIMELINE_EVENTS.map(
+                    (event, i) =>
+                      i === activeSlide && (
+                        <motion.div
+                          key={event.year}
+                          initial={{ opacity: 0, x: 60 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -60 }}
+                          transition={{ duration: 0.35, ease: "easeOut" }}
+                          className="w-full"
+                        >
+                          <div
+                            className="p-8 md:p-10 rounded-xl relative"
+                            style={{
+                              background: "var(--color-surface)",
+                              border: event.isCurrent ? "2px solid var(--color-accent)" : "1px solid transparent",
+                              boxShadow: event.isCurrent
+                                ? "0 0 30px rgba(212, 168, 67, 0.15)"
+                                : "0 4px 20px var(--color-shadow)",
+                            }}
+                          >
+                            {/* Current badge */}
+                            {event.isCurrent && (
+                              <span
+                                className="absolute -top-3 right-6 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+                                style={{
+                                  background: "var(--color-accent)",
+                                  color: "#0B1F13",
+                                }}
+                              >
+                                Present
+                              </span>
+                            )}
+
+                            {/* Year */}
+                            <span
+                              className="inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4"
+                              style={{
+                                background: event.isCurrent ? "var(--color-accent)" : "rgba(212, 168, 67, 0.15)",
+                                color: event.isCurrent ? "#0B1F13" : "var(--color-accent)",
+                              }}
+                            >
+                              {event.year}
+                            </span>
+
+                            <h4
+                              className="text-xl md:text-2xl font-semibold mb-3"
+                              style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
+                            >
+                              {event.title}
+                            </h4>
+                            <p className="text-sm md:text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                              {event.description}
+                            </p>
+
+                            {/* Slide counter */}
+                            <p className="mt-6 text-xs" style={{ color: "var(--color-text-secondary)", opacity: 0.5 }}>
+                              {i + 1} / {TIMELINE_EVENTS.length}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Next arrow */}
+              <button
+                onClick={goNext}
+                disabled={activeSlide === TIMELINE_EVENTS.length - 1}
+                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-20"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-accent)",
+                }}
+                aria-label="Next milestone"
+              >
+                <ChevronRight size={20} style={{ color: "var(--color-accent)" }} />
+              </button>
             </div>
           </div>
         </FadeUp>

@@ -31,14 +31,14 @@ export const RESOURCE_CATEGORIES = [
 ] as const;
 
 export const TIMELINE_EVENTS = [
-  { year: "2005", title: "Ascension to the Throne", description: "Installed as Chief Chamuka VI, becoming custodian of the Lenje people in Chisamba District." },
-  { year: "2010", title: "Land Reform Initiative", description: "Launched pioneering land certification programme ensuring equitable access for all community members." },
-  { year: "2014", title: "HeForShe Champion", description: "Became UN Women HeForShe champion, advocating for gender equality at the traditional leadership level." },
-  { year: "2016", title: "GBV By-Laws", description: "Enacted groundbreaking Gender-Based Violence by-laws within the chiefdom — a first in Zambia." },
-  { year: "2018", title: "UN General Assembly", description: "Addressed the United Nations General Assembly on customary law modernization and women's land rights." },
-  { year: "2020", title: "Digital Governance", description: "Introduced digital record-keeping for land administration and community governance." },
-  { year: "2023", title: "Continental Recognition", description: "Received African Union recognition for outstanding contribution to gender equality and land reform." },
-  { year: "2025", title: "SDG Alignment Report", description: "Published comprehensive report aligning chiefdom governance with UN Sustainable Development Goals." },
+  { year: "2005", title: "Ascension to the Throne", description: "Installed as Chief Chamuka VI, becoming custodian of the Lenje people in Chisamba District.", isCurrent: false },
+  { year: "2010", title: "Land Reform Initiative", description: "Launched pioneering land certification programme ensuring equitable access for all community members.", isCurrent: false },
+  { year: "2014", title: "HeForShe Champion", description: "Became UN Women HeForShe champion, advocating for gender equality at the traditional leadership level.", isCurrent: false },
+  { year: "2016", title: "GBV By-Laws", description: "Enacted groundbreaking Gender-Based Violence by-laws within the chiefdom — a first in Zambia.", isCurrent: false },
+  { year: "2018", title: "UN General Assembly", description: "Addressed the United Nations General Assembly on customary law modernization and women's land rights.", isCurrent: false },
+  { year: "2020", title: "Digital Governance", description: "Introduced digital record-keeping for land administration and community governance.", isCurrent: false },
+  { year: "2023", title: "Continental Recognition", description: "Received African Union recognition for outstanding contribution to gender equality and land reform.", isCurrent: false },
+  { year: "2025", title: "SDG Alignment Report", description: "Published comprehensive report aligning chiefdom governance with UN Sustainable Development Goals.", isCurrent: true },
 ];
 
 export const RESOURCES = [
@@ -56,7 +56,7 @@ export const RESOURCES = [
 export const GALLERY_ITEMS = [
   { id: 1, title: "Installation Ceremony", category: "Ceremony", size: "2x2" as const, image: "/gallery/ceremony-1.jpeg", type: "image" as const },
   { id: 2, title: "HeForShe Summit 2023", category: "Summit", size: "2x1" as const, image: "/gallery/summit-1.jpeg", type: "image" as const },
-  { id: 3, title: "Land Certification Handover", category: "Community", size: "1x1" as const, image: "/gallery/community-1.jpeg", type: "image" as const },
+  { id: 3, title: "HeForShe Community Dialogue", category: "Community", size: "1x1" as const, image: "/gallery/community-1.jpeg", type: "image" as const },
   { id: 4, title: "UN General Assembly Address", category: "Media", size: "1x2" as const, image: "/gallery/media-1.jpeg", type: "image" as const },
   { id: 5, title: "Community Insaka Meeting", category: "Community", size: "1x1" as const, image: "/gallery/community-2.jpeg", type: "image" as const },
   { id: 6, title: "Cultural Dance Performance", category: "Ceremony", size: "2x1" as const, image: "/gallery/ceremony-2.jpeg", type: "image" as const },
@@ -67,6 +67,10 @@ export const GALLERY_ITEMS = [
   { id: 11, title: "GLTN Champion Recognition", category: "Media", size: "2x2" as const, image: "/gallery/gltn-champion.jpeg", type: "image" as const, description: "GLTN's IAB Chairperson H.E. Mme. Brenda Mumtemba honors H.R.H. Chief Chamuka VI as a GLTN Champion for his efforts in championing land rights for women, youth and the poor using GLTN tools." },
   { id: 12, title: "Land Empowerment – World Bank Conference", category: "Community", size: "1x2" as const, image: "/gallery/land-empowerment.jpeg", type: "image" as const, description: "H.R.H. Chief Chamuka VI at the 19th Annual World Bank Conference on Land and Poverty in Washington D.C., advocating for the Social Tenure Domain Model (STDM) system to empower women and youth with land certificates." },
   { id: 13, title: "Courtesy Call – Zambian Ambassador to the USA", category: "Media", size: "1x1" as const, image: "/gallery/land-empowerment-ambassador.jpg", type: "image" as const, description: "H.R.H. Chief Chamuka VI with Zambia's Ambassador to the United States, H.E. Dr. Ngosa Simbyakula S.C., during a courtesy call at the Embassy in Washington D.C." },
+  { id: 14, title: "H.R.H. Chief Chamuka VI – Royal Salute", category: "Ceremony", size: "2x1" as const, image: "/gallery/chief-salute.jpg", type: "image" as const, description: "Chief Chamuka VI of the Lenje people in traditional regalia." },
+  { id: 15, title: "GLTN Partnership Meeting", category: "Summit", size: "1x1" as const, image: "/gallery/gltn-partner.jpeg", type: "image" as const, description: "Collaboration with the Global Land Tool Network on land governance and tenure security." },
+  { id: 16, title: "Cultural Programmes & Heritage", category: "Ceremony", size: "1x1" as const, image: "/gallery/cultural-programmes.jpeg", type: "image" as const, description: "Community cultural programmes preserving the traditions and heritage of the Lenje people." },
+  { id: 17, title: "US Peace Corps Engagement", category: "Community", size: "1x2" as const, image: "/gallery/us-peace.jpeg", type: "image" as const, description: "H.R.H. Chief Chamuka VI engaging with US Peace Corps representatives on community development initiatives." },
 ];
 
 export const EVENTS = [
