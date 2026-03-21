@@ -56,9 +56,14 @@ export function Contact() {
             className="text-4xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
-            Reach Us
+            Get in Touch
           </h2>
-          <div className="w-16 h-px mx-auto" style={{ background: "var(--color-accent)" }} />
+          <div className="ornament-divider mt-4">
+            <span className="diamond" />
+          </div>
+          <p className="text-base mt-4 max-w-xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
+            Reach out to the Office of Chief Chamuka VI for inquiries, partnerships, or community matters.
+          </p>
         </FadeUp>
 
         {/* Split Layout */}
@@ -66,7 +71,7 @@ export function Contact() {
           {/* Contact Form */}
           <FadeUp>
             <div
-              className="rounded-2xl p-8"
+              className="rounded-lg p-8"
               style={{ background: "var(--color-surface)" }}
             >
               {submitted ? (
@@ -178,8 +183,8 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full text-white font-medium transition-all duration-300 hover:shadow-lg disabled:opacity-70"
-                    style={{ background: "var(--color-accent)" }}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-lg disabled:opacity-70"
+                    style={{ background: "var(--color-accent)", color: "#0B1F13" }}
                   >
                     {isSubmitting ? (
                       <Loader2 size={18} className="animate-spin" />
@@ -198,7 +203,7 @@ export function Contact() {
             <div className="space-y-6">
               {/* Google Maps Embed */}
               <div
-                className="rounded-2xl overflow-hidden aspect-[4/3]"
+                className="rounded-lg overflow-hidden aspect-[4/3]"
                 style={{ background: "var(--color-surface)" }}
               >
                 <iframe
@@ -214,7 +219,7 @@ export function Contact() {
 
               {/* Office Details */}
               <div
-                className="rounded-2xl p-6 space-y-4"
+                className="rounded-lg p-6 space-y-4"
                 style={{ background: "var(--color-surface)" }}
               >
                 <h3
@@ -279,7 +284,7 @@ export function Contact() {
 
               {/* Newsletter Signup */}
               <div
-                className="rounded-2xl p-6"
+                className="rounded-lg p-6"
                 style={{ background: "var(--color-surface)" }}
               >
                 <h4
@@ -310,14 +315,74 @@ export function Contact() {
           </FadeUp>
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 pt-8 border-t text-center" style={{ borderColor: "var(--color-surface)" }}>
-          <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-            &copy; {new Date().getFullYear()} Office of Chief Chamuka VI. All rights reserved.
-          </p>
-          <p className="text-xs mt-1" style={{ color: "var(--color-text-secondary)", opacity: 0.6 }}>
-            Chamuka Palace, Chisamba, Central Province, Zambia
-          </p>
+        {/* Footer — dark section */}
+        <div
+          className="mt-16 -mx-6 -mb-20 px-6 py-12"
+          style={{ background: "#0B1F13" }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 items-start mb-8">
+              {/* Brand */}
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                  style={{
+                    background: "rgba(27, 67, 50, 0.5)",
+                    color: "#D4A843",
+                    fontFamily: "var(--font-display)",
+                    border: "2px solid #D4A843",
+                  }}
+                >
+                  VI
+                </div>
+                <div>
+                  <p className="text-sm font-semibold" style={{ color: "#E8F0EC", fontFamily: "var(--font-display)" }}>
+                    Chief Chamuka VI
+                  </p>
+                  <p className="text-[11px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>
+                    Chisamba, Zambia
+                  </p>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div className="flex flex-wrap gap-x-6 gap-y-2 md:justify-center">
+                {["About", "Resources", "Gallery", "Contact"].map((link) => (
+                  <span key={link} className="text-xs uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.5)" }}>
+                    {link}
+                  </span>
+                ))}
+              </div>
+
+              {/* Social */}
+              <div className="flex gap-4 md:justify-end">
+                {SOCIAL_LINKS.map((link) => (
+                  <a
+                    key={link.platform}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:scale-110"
+                    style={{ color: "rgba(255,255,255,0.4)" }}
+                    aria-label={link.label}
+                  >
+                    <SocialIcon platform={link.platform} size={16} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-px mb-6" style={{ background: "rgba(255,255,255,0.08)" }} />
+
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+              <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+                &copy; {new Date().getFullYear()} Office of His Royal Highness Chief Chamuka VI. All rights reserved.
+              </p>
+              <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
+                Chamuka Palace, Chisamba, Central Province, Zambia
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

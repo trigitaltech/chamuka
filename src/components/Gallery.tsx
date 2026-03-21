@@ -49,7 +49,9 @@ export function Gallery() {
           >
             Milestones &amp; Moments
           </h2>
-          <div className="w-16 h-px mx-auto" style={{ background: "var(--color-accent)" }} />
+          <div className="ornament-divider mt-4">
+            <span className="diamond" />
+          </div>
         </FadeUp>
 
         {/* Bento Grid */}
@@ -70,7 +72,7 @@ export function Gallery() {
                       description: "description" in item ? (item as Record<string, unknown>).description as string : undefined,
                     })
                   }
-                  className="card-glow w-full h-full rounded-xl overflow-hidden relative group"
+                  className="card-glow w-full h-full rounded-lg overflow-hidden relative group"
                   style={{ background: "var(--color-surface)" }}
                 >
                   {/* Thumbnail image */}
@@ -141,7 +143,7 @@ export function Gallery() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="card-glow rounded-xl overflow-hidden group cursor-pointer"
+                className="card-glow rounded-lg overflow-hidden group cursor-pointer"
                 style={{ background: "var(--color-surface)" }}
               >
                 {/* Feature image placeholder */}

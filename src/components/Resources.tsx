@@ -39,7 +39,9 @@ export function Resources() {
           >
             Documents &amp; Downloads
           </h2>
-          <div className="w-16 h-px mx-auto mb-4" style={{ background: "var(--color-accent)" }} />
+          <div className="ornament-divider mt-4 mb-4">
+            <span className="diamond" />
+          </div>
           <p className="text-base max-w-2xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
             Access by-laws, annual reports, land guides, speeches, and SDG alignment documents
             from the Office of Chief Chamuka VI.
@@ -50,7 +52,7 @@ export function Resources() {
         <FadeUp className="mb-10">
           <div className="flex flex-col sm:flex-row gap-4 max-w-3xl mx-auto">
             <div
-              className="flex items-center gap-2 flex-1 px-4 py-3 rounded-xl"
+              className="flex items-center gap-2 flex-1 px-4 py-3 rounded-lg"
               style={{ background: "var(--color-surface)" }}
             >
               <Search size={18} style={{ color: "var(--color-text-secondary)" }} />
@@ -64,7 +66,7 @@ export function Resources() {
               />
             </div>
             <div
-              className="flex items-center gap-2 px-4 py-3 rounded-xl sm:hidden"
+              className="flex items-center gap-2 px-4 py-3 rounded-lg sm:hidden"
               style={{ background: "var(--color-surface)" }}
             >
               <Filter size={18} style={{ color: "var(--color-text-secondary)" }} />
@@ -114,7 +116,7 @@ export function Resources() {
             <StaggerItem key={resource.id}>
               <motion.div
                 layout
-                className="card-glow rounded-xl overflow-hidden h-full flex flex-col"
+                className="card-glow rounded-lg overflow-hidden h-full flex flex-col"
                 style={{ background: "var(--color-surface)" }}
               >
                 {/* Category bar */}

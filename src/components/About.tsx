@@ -42,11 +42,13 @@ export function About() {
           >
             Chief Chamuka VI
           </h2>
-          <div className="w-16 h-px mx-auto" style={{ background: "var(--color-accent)" }} />
+          <div className="ornament-divider mt-4">
+            <span className="diamond" />
+          </div>
         </FadeUp>
 
         {/* Two-Column Bio */}
-        <FadeUp className="grid md:grid-cols-2 gap-12 mb-20">
+        <FadeUp className="grid md:grid-cols-2 gap-12 mb-16">
           <div className="flex flex-col justify-center order-2 md:order-1">
             <h3
               className="text-2xl font-semibold mb-6"
@@ -78,8 +80,11 @@ export function About() {
 
           <div className="order-1 md:order-2">
             <div
-              className="aspect-[3/4] rounded-2xl overflow-hidden relative"
-              style={{ background: "var(--color-surface)" }}
+              className="aspect-[3/4] relative rounded-lg overflow-hidden"
+              style={{
+                border: "3px solid var(--color-accent)",
+                boxShadow: "0 8px 40px var(--color-shadow)",
+              }}
             >
               <Image
                 src="/chief-chamuka-portrait.png"
@@ -89,12 +94,40 @@ export function About() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
-              {/* Gold border accent */}
+              {/* Bottom gradient with name plate */}
               <div
-                className="absolute bottom-0 left-0 right-0 h-1"
-                style={{ background: "var(--color-accent)" }}
-              />
+                className="absolute bottom-0 left-0 right-0 p-4 text-center"
+                style={{ background: "linear-gradient(to top, rgba(11,31,19,0.8), transparent)" }}
+              >
+                <p
+                  className="text-white text-sm font-semibold tracking-wide"
+                  style={{ fontFamily: "var(--font-display)", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
+                >
+                  H.R.H. Chief Chamuka VI
+                </p>
+                <p className="text-[11px] uppercase tracking-[0.15em]" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  Custodian of the Lenje People
+                </p>
+              </div>
             </div>
+          </div>
+        </FadeUp>
+
+        {/* Featured Quote */}
+        <FadeUp className="mb-20">
+          <div
+            className="max-w-3xl mx-auto p-8 md:p-10 rounded-lg accent-bar-top card-elevated"
+            style={{ background: "var(--color-surface)" }}
+          >
+            <blockquote className="leader-quote">
+              There is very good comprehension and broad acceptance of the STDM concept by both the
+              traditional leaders and people in my Chiefdom. All seven Chiefdoms in the Lenje Land
+              resolved to engage PPHZP to map boundaries so we can lessen land disputes, and our role
+              as chiefs is to provide leadership to the process.
+            </blockquote>
+            <p className="mt-4 text-sm font-medium pl-6" style={{ color: "var(--color-accent)" }}>
+              — H.R.H. Chief Chamuka VI
+            </p>
           </div>
         </FadeUp>
 
@@ -102,11 +135,16 @@ export function About() {
         <div className="grid md:grid-cols-2 gap-6 mb-20">
           <FadeUp>
             <div
-              className="card-glow p-8 rounded-2xl h-full"
+              className="accent-bar-top card-elevated card-glow p-8 rounded-lg h-full"
               style={{ background: "var(--color-surface)" }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <Eye size={24} style={{ color: "var(--color-accent)" }} />
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{ background: "rgba(212, 168, 67, 0.15)" }}
+                >
+                  <Eye size={20} style={{ color: "var(--color-accent)" }} />
+                </div>
                 <h3
                   className="text-xl font-semibold"
                   style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
@@ -114,7 +152,7 @@ export function About() {
                   Vision
                 </h3>
               </div>
-              <p style={{ color: "var(--color-text-secondary)" }}>
+              <p className="leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                 A Lenje chiefdom where cultural heritage and modern governance unite to deliver
                 justice, equality, and prosperity for every man, woman, and child — setting a
                 continental benchmark for traditional leadership in the 21st century.
@@ -123,11 +161,16 @@ export function About() {
           </FadeUp>
           <FadeUp delay={0.1}>
             <div
-              className="card-glow p-8 rounded-2xl h-full"
+              className="accent-bar-top card-elevated card-glow p-8 rounded-lg h-full"
               style={{ background: "var(--color-surface)" }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <Target size={24} style={{ color: "var(--color-accent)" }} />
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{ background: "rgba(212, 168, 67, 0.15)" }}
+                >
+                  <Target size={20} style={{ color: "var(--color-accent)" }} />
+                </div>
                 <h3
                   className="text-xl font-semibold"
                   style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
@@ -135,7 +178,7 @@ export function About() {
                   Mission
                 </h3>
               </div>
-              <p style={{ color: "var(--color-text-secondary)" }}>
+              <p className="leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                 To preserve the rich heritage of the Lenje people while championing gender equality,
                 equitable land rights, and transparent governance through innovative by-laws,
                 international partnerships, and grassroots community engagement.
@@ -147,26 +190,34 @@ export function About() {
         {/* Focus Areas */}
         <FadeUp className="mb-20">
           <h3
-            className="text-2xl font-semibold text-center mb-10"
+            className="text-2xl font-semibold text-center mb-3"
             style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
-            Focus Areas
+            Areas of Focus
           </h3>
+          <div className="ornament-divider mb-10">
+            <span className="diamond" />
+          </div>
           <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {FOCUS_AREAS.map((area) => (
               <StaggerItem key={area.title}>
                 <div
-                  className="card-glow p-6 rounded-xl text-center h-full"
+                  className="gold-border-top card-glow p-6 rounded-xl h-full"
                   style={{ background: "var(--color-surface)" }}
                 >
-                  <area.icon size={32} className="mx-auto mb-4" style={{ color: "var(--color-accent)" }} />
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
+                    style={{ background: "rgba(212, 168, 67, 0.12)" }}
+                  >
+                    <area.icon size={24} style={{ color: "var(--color-accent)" }} />
+                  </div>
                   <h4
-                    className="font-semibold mb-2"
+                    className="font-semibold mb-2 text-center"
                     style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
                   >
                     {area.title}
                   </h4>
-                  <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+                  <p className="text-sm text-center" style={{ color: "var(--color-text-secondary)" }}>
                     {area.description}
                   </p>
                 </div>
@@ -178,11 +229,14 @@ export function About() {
         {/* Interactive Timeline */}
         <FadeUp className="mb-20">
           <h3
-            className="text-2xl font-semibold text-center mb-10"
+            className="text-2xl font-semibold text-center mb-3"
             style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
             Journey &amp; Milestones
           </h3>
+          <div className="ornament-divider mb-10">
+            <span className="diamond" />
+          </div>
 
           {/* Vertical Timeline */}
           <div className="relative max-w-4xl mx-auto">
@@ -286,16 +340,19 @@ export function About() {
         {/* Accordion */}
         <FadeUp>
           <h3
-            className="text-2xl font-semibold text-center mb-10"
+            className="text-2xl font-semibold text-center mb-3"
             style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
             Learn More
           </h3>
+          <div className="ornament-divider mb-10">
+            <span className="diamond" />
+          </div>
           <div className="max-w-3xl mx-auto space-y-3">
             {ACCORDION_ITEMS.map((item, i) => (
               <div
                 key={i}
-                className="rounded-xl overflow-hidden"
+                className="rounded-xl overflow-hidden gold-border-left"
                 style={{ background: "var(--color-surface)" }}
               >
                 <button

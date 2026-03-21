@@ -1,7 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(npm run:*)",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img1.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/gltn-champion.jpeg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img2.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/land-empowerment.jpeg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img2_1.jpg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/land-empowerment-ambassador.jpg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img4_Installationn_Cermony.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/ceremony-1.jpeg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img5_HeforShe_Summit.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/summit-1.jpeg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img2_land_certification.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/community-1.jpeg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img6_Inseka_Meeting.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/community-2.jpeg\")",
+      "Bash(cp \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/img/img_7_Gender_inequality.jpeg\" \"C:/Users/Venkata/Desktop/New Requirements/Chief_Website/Site/public/gallery/summit-2.jpeg\")",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://statehouse.gov.ng/team/bola-ahmed-tinubu/\" -o /tmp/nigeria_site.html)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://www.zambiatourism.com/\" -o /tmp/zambia_site.html)",
+      "WebFetch(domain:statehouse.gov.ng)",
+      "WebFetch(domain:www.zambiatourism.com)"
     ]
   }
 }
