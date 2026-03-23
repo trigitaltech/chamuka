@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronLeft, ChevronRight, Target, Eye, Shield, Users, Scale, Landmark } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronDown, Target, Eye, Shield, Users, Scale, Landmark } from "lucide-react";
 import { FadeUp, StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TIMELINE_EVENTS } from "@/lib/constants";
 
@@ -23,15 +23,16 @@ const ACCORDION_ITEMS = [
 
 export function About() {
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
-  const currentIndex = TIMELINE_EVENTS.findIndex((e) => e.isCurrent);
-  const [activeSlide, setActiveSlide] = useState(currentIndex >= 0 ? currentIndex : TIMELINE_EVENTS.length - 1);
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
 
-  const goTo = useCallback((index: number) => {
-    setActiveSlide(Math.max(0, Math.min(index, TIMELINE_EVENTS.length - 1)));
-  }, []);
-
-  const goPrev = useCallback(() => goTo(activeSlide - 1), [activeSlide, goTo]);
-  const goNext = useCallback(() => goTo(activeSlide + 1), [activeSlide, goTo]);
+  const toggleFlip = (index: number) => {
+    setFlippedCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  };
 
   return (
     <section
@@ -247,169 +248,143 @@ export function About() {
             <span className="diamond" />
           </div>
 
-          {/* Carousel Timeline */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Year dots / progress track */}
-            <div className="flex items-center justify-center gap-1 mb-8">
-              {TIMELINE_EVENTS.map((event, i) => {
-                const isActive = i === activeSlide;
-                const isCurrent = event.isCurrent;
-                return (
-                  <button
-                    key={event.year}
-                    onClick={() => goTo(i)}
-                    className="group relative flex flex-col items-center"
-                    aria-label={`Go to ${event.year}`}
-                  >
-                    {/* Connecting line (not on first) */}
-                    {i > 0 && (
-                      <div
-                        className="absolute right-full top-1/2 -translate-y-1/2 h-px hidden sm:block"
-                        style={{
-                          width: "calc(100% - 0.25rem)",
-                          background: i <= activeSlide ? "var(--color-accent)" : "var(--color-text-secondary)",
-                          opacity: i <= activeSlide ? 0.6 : 0.2,
-                        }}
-                      />
-                    )}
-                    {/* Dot */}
+          {/* Flashcard Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {TIMELINE_EVENTS.map((event, i) => {
+              const isFlipped = flippedCards.has(i);
+              const isCurrent = event.isCurrent;
+              return (
+                <motion.div
+                  key={event.year}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: i * 0.07, duration: 0.5 }}
+                  className="relative cursor-pointer"
+                  style={{ perspective: "800px", height: "200px" }}
+                  onClick={() => toggleFlip(i)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${event.year}: ${event.title}. Click to flip.`}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(i); } }}
+                >
+                  {/* Pulse glow behind current card */}
+                  {isCurrent && (
                     <div
-                      className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer"
+                      className="absolute -inset-1 rounded-2xl animate-pulse opacity-30 pointer-events-none"
+                      style={{ background: "var(--color-accent)", filter: "blur(8px)" }}
+                    />
+                  )}
+
+                  {/* Card inner — handles the 3D flip */}
+                  <div
+                    className="relative w-full h-full transition-transform duration-500"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                    }}
+                  >
+                    {/* ===== FRONT FACE ===== */}
+                    <div
+                      className="absolute inset-0 rounded-xl flex flex-col items-center justify-center p-5 text-center"
                       style={{
-                        background: isActive
-                          ? "var(--color-accent)"
-                          : isCurrent
-                          ? "rgba(212, 168, 67, 0.3)"
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                        background: isCurrent
+                          ? "linear-gradient(135deg, var(--color-accent), #b8882e)"
                           : "var(--color-surface)",
-                        border: isCurrent && !isActive
-                          ? "2px solid var(--color-accent)"
-                          : isActive
-                          ? "none"
-                          : "2px solid var(--color-text-secondary)",
-                        transform: isActive ? "scale(1.15)" : "scale(1)",
-                        boxShadow: isActive ? "0 0 20px rgba(212, 168, 67, 0.4)" : "none",
+                        border: isCurrent ? "none" : "1px solid rgba(212, 168, 67, 0.2)",
+                        boxShadow: isCurrent
+                          ? "0 8px 30px rgba(212, 168, 67, 0.3)"
+                          : "0 4px 16px var(--color-shadow)",
                       }}
                     >
-                      <span
-                        className="text-[10px] sm:text-xs font-bold"
-                        style={{
-                          color: isActive ? "#0B1F13" : "var(--color-text-secondary)",
-                        }}
-                      >
-                        {event.year.slice(-2)}
-                      </span>
-                      {/* Pulse ring for current */}
+                      {/* Present badge */}
                       {isCurrent && (
                         <span
-                          className="absolute inset-0 rounded-full animate-ping opacity-20"
-                          style={{ background: "var(--color-accent)" }}
-                        />
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Slide card with navigation arrows */}
-            <div className="relative flex items-center gap-4">
-              {/* Prev arrow */}
-              <button
-                onClick={goPrev}
-                disabled={activeSlide === 0}
-                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-20"
-                style={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-accent)",
-                }}
-                aria-label="Previous milestone"
-              >
-                <ChevronLeft size={20} style={{ color: "var(--color-accent)" }} />
-              </button>
-
-              {/* Card area */}
-              <div className="flex-1 overflow-hidden relative" style={{ minHeight: "220px" }}>
-                <AnimatePresence mode="wait">
-                  {TIMELINE_EVENTS.map(
-                    (event, i) =>
-                      i === activeSlide && (
-                        <motion.div
-                          key={event.year}
-                          initial={{ opacity: 0, x: 60 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -60 }}
-                          transition={{ duration: 0.35, ease: "easeOut" }}
-                          className="w-full"
+                          className="absolute top-3 right-3 text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                          style={{ background: "rgba(11,31,19,0.4)", color: "#fff" }}
                         >
-                          <div
-                            className="p-8 md:p-10 rounded-xl relative"
-                            style={{
-                              background: "var(--color-surface)",
-                              border: event.isCurrent ? "2px solid var(--color-accent)" : "1px solid transparent",
-                              boxShadow: event.isCurrent
-                                ? "0 0 30px rgba(212, 168, 67, 0.15)"
-                                : "0 4px 20px var(--color-shadow)",
-                            }}
-                          >
-                            {/* Current badge */}
-                            {event.isCurrent && (
-                              <span
-                                className="absolute -top-3 right-6 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-                                style={{
-                                  background: "var(--color-accent)",
-                                  color: "#0B1F13",
-                                }}
-                              >
-                                Present
-                              </span>
-                            )}
+                          Now
+                        </span>
+                      )}
 
-                            {/* Year */}
-                            <span
-                              className="inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4"
-                              style={{
-                                background: event.isCurrent ? "var(--color-accent)" : "rgba(212, 168, 67, 0.15)",
-                                color: event.isCurrent ? "#0B1F13" : "var(--color-accent)",
-                              }}
-                            >
-                              {event.year}
-                            </span>
+                      {/* Year */}
+                      <span
+                        className="text-3xl md:text-4xl font-bold mb-2"
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          color: isCurrent ? "#0B1F13" : "var(--color-accent)",
+                        }}
+                      >
+                        {event.year}
+                      </span>
 
-                            <h4
-                              className="text-xl md:text-2xl font-semibold mb-3"
-                              style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
-                            >
-                              {event.title}
-                            </h4>
-                            <p className="text-sm md:text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                              {event.description}
-                            </p>
+                      {/* Title */}
+                      <h4
+                        className="text-sm md:text-base font-semibold leading-tight"
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          color: isCurrent ? "#0B1F13" : "var(--color-text)",
+                        }}
+                      >
+                        {event.title}
+                      </h4>
 
-                            {/* Slide counter */}
-                            <p className="mt-6 text-xs" style={{ color: "var(--color-text-secondary)", opacity: 0.5 }}>
-                              {i + 1} / {TIMELINE_EVENTS.length}
-                            </p>
-                          </div>
-                        </motion.div>
-                      )
-                  )}
-                </AnimatePresence>
-              </div>
+                      {/* Tap hint */}
+                      <span
+                        className="mt-3 text-[10px] uppercase tracking-widest opacity-50"
+                        style={{ color: isCurrent ? "#0B1F13" : "var(--color-text-secondary)" }}
+                      >
+                        Tap to read
+                      </span>
+                    </div>
 
-              {/* Next arrow */}
-              <button
-                onClick={goNext}
-                disabled={activeSlide === TIMELINE_EVENTS.length - 1}
-                className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-20"
-                style={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-accent)",
-                }}
-                aria-label="Next milestone"
-              >
-                <ChevronRight size={20} style={{ color: "var(--color-accent)" }} />
-              </button>
-            </div>
+                    {/* ===== BACK FACE ===== */}
+                    <div
+                      className="absolute inset-0 rounded-xl flex flex-col justify-center p-5"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                        background: isCurrent
+                          ? "linear-gradient(135deg, #b8882e, var(--color-accent))"
+                          : "var(--color-surface)",
+                        border: isCurrent ? "none" : "1px solid rgba(212, 168, 67, 0.2)",
+                        boxShadow: isCurrent
+                          ? "0 8px 30px rgba(212, 168, 67, 0.3)"
+                          : "0 4px 16px var(--color-shadow)",
+                      }}
+                    >
+                      {/* Year pill */}
+                      <span
+                        className="inline-block self-start text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full mb-3"
+                        style={{
+                          background: isCurrent ? "rgba(11,31,19,0.3)" : "rgba(212, 168, 67, 0.15)",
+                          color: isCurrent ? "#fff" : "var(--color-accent)",
+                        }}
+                      >
+                        {event.year}
+                      </span>
+
+                      <p
+                        className="text-xs md:text-sm leading-relaxed"
+                        style={{ color: isCurrent ? "#0B1F13" : "var(--color-text-secondary)" }}
+                      >
+                        {event.description}
+                      </p>
+
+                      <span
+                        className="mt-3 text-[10px] uppercase tracking-widest opacity-50 self-end"
+                        style={{ color: isCurrent ? "#0B1F13" : "var(--color-text-secondary)" }}
+                      >
+                        Tap to close
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </FadeUp>
 
