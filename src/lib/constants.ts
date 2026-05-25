@@ -71,7 +71,7 @@ export const GALLERY_ITEMS = [
   { id: 15, title: "GLTN Partnership Meeting", category: "Summit", size: "1x1" as const, image: "/gallery/gltn-partner.jpeg", type: "image" as const, description: "Collaboration with the Global Land Tool Network on land governance and tenure security." },
   { id: 16, title: "Cultural Programmes & Heritage", category: "Ceremony", size: "1x1" as const, image: "/gallery/cultural-programmes.jpeg", type: "image" as const, description: "Community cultural programmes preserving the traditions and heritage of the Lenje people." },
   { id: 17, title: "US Peace Corps Engagement", category: "Community", size: "1x2" as const, image: "/gallery/us-peace.jpeg", type: "image" as const, description: "H.R.H. Chief Chamuka VI engaging with US Peace Corps representatives on community development initiatives." },
-  { id: 18, title: "Chief Departs for Uganda", category: "Community", size: "1x1" as const, image: "/gallery/chief-departs-uganda.jpeg", type: "image" as const, description: "Chief Chamuka VI departs for Uganda on an official YPA invitation to strengthen youth, agriculture, and infrastructure partnerships." },
+  { id: 18, title: "Uganda Trip – YPA Visit", category: "Community", size: "2x2" as const, image: "/gallery/Uganda-trip-1.jpeg", type: "carousel" as const, description: "H.R.H. Chief Chamuka VI's official visit to Uganda on a YPA invitation to strengthen youth, agriculture, and infrastructure partnerships.", images: ["/gallery/Uganda-trip-1.jpeg", "/gallery/Uganda-trip-2.jpeg", "/gallery/Uganda-trip-3.jpeg", "/gallery/Uganda-trip-4.jpeg", "/gallery/Uganda-trip-5.jpeg", "/gallery/Uganda-trip-6.jpeg", "/gallery/Uganda-trip-7.jpeg", "/gallery/Uganda-trip-8.jpeg"] },
 ] as const;
 
 export const EVENTS = [
